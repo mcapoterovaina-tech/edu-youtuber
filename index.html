@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Curaduría Educativa</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      background-color: #111;
+      color: #f5f5f5;
+    }
+    header {
+      padding: 1rem;
+      text-align: center;
+      background: #1c1c1c;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .card {
+      background: #1e1e1e;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 16px rgba(0,0,0,.4);
+    }
+    .card img {
+      width: 100%;
+      display: block;
+    }
+    .card-content {
+      padding: .5rem .75rem;
+    }
+    .card-title {
+      font-size: 1rem;
+      margin: 0 0 .5rem;
+    }
+    .card-meta {
+      font-size: .85rem;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📚 Ciencia & Educación</h1>
+  </header>
+
+  <main>
+    <section id="video-grid" class="grid"></section>
+  </main>
+
+  <script>
+    // Datos de ejemplo
+    const videos = [
+      {
+        id: "video1",
+        title: "¿Qué es la entropía?",
+        channel: "What If Español",
+        thumbnail: "https://i.ytimg.com/vi/2sm7uhj3UqA/hqdefault.jpg",
+        categories: ["física", "termodinámica"]
+      },
+      {
+        id: "video2",
+        title: "Introducción a la mecánica cuántica",
+        channel: "QuantumLatam",
+        thumbnail: "https://i.ytimg.com/vi/0Q9XcWhdCXM/hqdefault.jpg",
+        categories: ["física", "cuántica"]
+      }
+    ];
+
+    function renderGrid() {
+      const container = document.getElementById('video-grid');
+      videos.forEach(video => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.onclick = () => window.location.href = `video.html?v=${video.id}`;
+        card.innerHTML = `
+          <img src="${video.thumbnail}" alt="${video.title}">
+          <div class="card-content">
+            <h3 class="card-title">${video.title}</h3>
+            <div class="card-meta">${video.channel}</div>
+            <div class="card-meta">${video.categories.join(', ')}</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    renderGrid();
+  </script>
+</body>
+</html>
